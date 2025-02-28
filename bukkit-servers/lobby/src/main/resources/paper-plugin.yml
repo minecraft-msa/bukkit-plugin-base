@@ -1,0 +1,4 @@
+name: lobby
+version: '1.0.0'
+main: io.github.bgmsound.bukkit.LobbyServerPlugin
+api-version: '1.21'
