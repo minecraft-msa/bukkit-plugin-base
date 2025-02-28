@@ -15,7 +15,7 @@ class KafkaConsumerConfig {
     fun consumerFactory(): ConsumerFactory<String, Any> {
         val config = mapOf(
             ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG to "host.docker.internal:9092",
-            ConsumerConfig.GROUP_ID_CONFIG to "bukkit-msa-chat-group",
+            ConsumerConfig.GROUP_ID_CONFIG to "bukkit-msa-default-group",
             ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG to StringDeserializer::class.java,
             ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG to StringDeserializer::class.java
         )
@@ -25,7 +25,7 @@ class KafkaConsumerConfig {
     @Bean
     fun kafkaListenerContainerFactory(consumerFactory: ConsumerFactory<String, Any>): ConcurrentKafkaListenerContainerFactory<String, Any> {
         val factory = ConcurrentKafkaListenerContainerFactory<String, Any>()
-        factory.consumerFactory = consumerFactory()
+        factory.consumerFactory = consumerFactory
         return factory
     }
 }

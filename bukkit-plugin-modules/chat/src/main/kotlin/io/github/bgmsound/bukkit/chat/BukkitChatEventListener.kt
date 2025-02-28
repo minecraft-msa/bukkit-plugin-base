@@ -1,5 +1,6 @@
 package io.github.bgmsound.bukkit.chat
 
+import io.github.bgmsound.bukkit.chat.ChatProperties.asChatFormat
 import io.papermc.paper.event.player.AsyncChatEvent
 import net.kyori.adventure.text.TextComponent
 import org.bukkit.event.EventHandler
@@ -21,6 +22,10 @@ class BukkitChatEventListener(
         if (message !is TextComponent) {
             return
         }
-        kafkaTemplate.send(ChatProperties.CHAT_TOPIC, message.content())
+        event.isCancelled = true
+        kafkaTemplate.send(
+            ChatProperties.CHAT_TOPIC,
+            message.content().asChatFormat(event.player)
+        )
     }
 }
